@@ -1,0 +1,330 @@
+/* --- 1. VARIABLES & CONFIG --- */
+:root {
+  /* Palette: Dark Organic */
+  --bg: #050505;
+  --fg: #e6e4dc; /* Warm bone/cream color instead of stark white */
+  --grid-line: rgba(230, 228, 220, 0.15); /* Subtle structure */
+
+  /* The "Fluid" Colors */
+  --orb-1: #4a5c40; /* Deep Moss Green */
+  --orb-2: #6b3e2e; /* Terracotta/Clay */
+
+  /* Fonts: The Rigid vs The Organic */
+  --font-serif:
+    'Times New Roman', Times, Baskerville, serif; /* Organic/Classic */
+  --font-sans:
+    'Helvetica Neue', Helvetica, Arial, sans-serif; /* Brutalist/Bold */
+  --font-mono: 'Courier New', Courier, monospace; /* Technical */
+}
+
+/* --- 2. RESET & BASE --- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  height: 100dvh;
+  overflow: hidden;
+  position: relative;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+/* --- 3. BACKGROUND EFFECTS (THE FLUIDITY) --- */
+
+/* Film Grain Texture */
+.noise-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.07;
+  z-index: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Floating Gradient Orbs */
+.fluid-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  z-index: -1;
+  opacity: 0.6;
+  animation: float 20s infinite ease-in-out;
+}
+
+.orb-1 {
+  width: 60vw;
+  height: 60vw;
+  background: var(--orb-1);
+  top: -20%;
+  left: -10%;
+  animation-delay: 0s;
+}
+
+.orb-2 {
+  width: 50vw;
+  height: 50vw;
+  background: var(--orb-2);
+  bottom: -10%;
+  right: -10%;
+  animation-delay: -10s;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+}
+
+/* --- 4. GLASSMORPHIC UTILITIES --- */
+.glass-panel {
+  /* This creates the separation between the "soup" background and the "rigid" content */
+  background: rgba(5, 5, 5, 0.2);
+  backdrop-filter: blur(10px); /* Frosted glass effect */
+  -webkit-backdrop-filter: blur(10px);
+  position: relative;
+  z-index: 1;
+}
+
+.border-b {
+  border-bottom: 1px solid var(--grid-line);
+}
+.border-r {
+  border-right: 1px solid var(--grid-line);
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+/* --- 5. LAYOUT GRID --- */
+.layout-grid {
+  display: grid;
+  grid-template-rows: auto 1fr auto auto; /* Header, Hero, Marquee, Footer */
+  height: 100%;
+  width: 100%;
+  max-width: 1800px;
+  margin: 0 auto;
+  border-left: 1px solid var(--grid-line);
+  border-right: 1px solid var(--grid-line);
+}
+
+/* --- 6. SECTIONS --- */
+
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+}
+
+.mono-stack {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+.dot-indicator {
+  width: 8px;
+  height: 8px;
+  background-color: #4fce5d; /* Tech Green */
+  border-radius: 50%;
+  box-shadow: 0 0 10px #4fce5d;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Hero Section */
+.hero-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-content {
+  text-align: center;
+  z-index: 2;
+}
+
+.mono-spaced-tag {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  letter-spacing: 0.2em;
+  color: var(--fg);
+  opacity: 0.6;
+}
+
+h1 {
+  font-size: clamp(4rem, 12vw, 10rem);
+  line-height: 0.9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+/* The Fusion of Fonts */
+.serif-italic {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.05em;
+  /* Organic fluid gradient text */
+  background: linear-gradient(to right, #fff, #bababa);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.sans-block {
+  font-family: var(--font-sans);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+/* Marquee */
+.marquee-container {
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 1.2rem 0;
+}
+
+.marquee-content {
+  display: inline-block;
+  animation: scroll 30s linear infinite;
+}
+
+.marquee-content span {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-style: italic;
+  margin: 0 2rem;
+}
+
+.divider {
+  font-family: var(--font-mono);
+  opacity: 0.5;
+  font-style: normal !important;
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Footer Grid */
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 25vh; /* Fixed height for footer area */
+}
+
+.action-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.5rem;
+  transition: background 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.mono-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  opacity: 0.6;
+}
+
+.link-text {
+  font-size: 2rem;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  text-transform: uppercase;
+  z-index: 2;
+}
+
+/* Hover Effect: The "Organic Swell" */
+.action-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0%;
+  height: 0%;
+  background: var(--fg);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition:
+    width 0.6s ease,
+    height 0.6s ease;
+  z-index: 1;
+  filter: blur(20px);
+}
+
+.action-btn:hover::before {
+  width: 150%;
+  height: 150%;
+}
+
+.action-btn:hover .link-text,
+.action-btn:hover .mono-label {
+  color: var(--bg); /* Invert text color on hover */
+  z-index: 2;
+}
+
+/* --- 7. RESPONSIVE --- */
+@media (min-width: 768px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  h1 {
+    flex-direction: row; /* Side by side on desktop */
+    gap: 1rem;
+  }
+}
