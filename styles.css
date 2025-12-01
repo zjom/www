@@ -158,18 +158,6 @@ h1 {
   gap: 0;
 }
 
-/* The Fusion of Fonts */
-.serif-italic {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-weight: 400;
-  letter-spacing: -0.05em;
-  /* Organic fluid gradient text */
-  background: linear-gradient(to right, #fff, #bababa);
-  -webkit-background-clip: text;
-  color: transparent;
-}
-
 .sans-block {
   font-family: var(--font-sans);
   font-weight: 900;
@@ -194,6 +182,8 @@ h1 {
   font-family: var(--font-mono);
   font-size: 1.5rem;
   margin: 0 2rem;
+  letter-spacing: 0.05em;
+  opacity: 0.8;
 }
 
 .divider {
