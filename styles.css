@@ -429,7 +429,8 @@ body.scrollable {
 
 .item-title {
   font-family: var(--font-sans);
-  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  /* UPDATED: Reduced min size from 1.5rem to 1.1rem */
+  font-size: clamp(1.1rem, 4vw, 2.5rem);
   font-weight: 700;
   text-transform: uppercase;
   line-height: 1;
@@ -437,9 +438,17 @@ body.scrollable {
 
 /* Reuse the wrapper height logic from homepage footer */
 .item-title .link-text-wrapper {
-  height: clamp(1.5rem, 3vw, 2.5rem);
+  /* UPDATED: Height must match the font-size clamp exactly */
+  height: clamp(1.1rem, 4vw, 2.5rem);
   overflow: hidden;
   position: relative;
+}
+
+/* NEW: This is crucial. It forces the inner .link-text 
+   to respect the smaller mobile size defined above, 
+   overriding the global '2rem' setting. */
+.item-title .link-text {
+  font-size: inherit;
 }
 
 .item-read-time {
