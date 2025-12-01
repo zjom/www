@@ -5,10 +5,6 @@
   --fg: #e6e4dc; /* Warm bone/cream color instead of stark white */
   --grid-line: rgba(230, 228, 220, 0.15); /* Subtle structure */
 
-  /* The "Fluid" Colors */
-  --orb-1: #4a5c40; /* Deep Moss Green */
-  --orb-2: #6b3e2e; /* Terracotta/Clay */
-
   /* Fonts: The Rigid vs The Organic */
   --font-serif:
     'Times New Roman', Times, Baskerville, serif; /* Organic/Classic */
@@ -54,50 +50,8 @@ a {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
-/* Floating Gradient Orbs */
-.fluid-orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  z-index: -1;
-  opacity: 0.6;
-  animation: float 20s infinite ease-in-out;
-}
-
-.orb-1 {
-  width: 60vw;
-  height: 60vw;
-  background: var(--orb-1);
-  top: -20%;
-  left: -10%;
-  animation-delay: 0s;
-}
-
-.orb-2 {
-  width: 50vw;
-  height: 50vw;
-  background: var(--orb-2);
-  bottom: -10%;
-  right: -10%;
-  animation-delay: -10s;
-}
-
-@keyframes float {
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-  33% {
-    transform: translate(30px, -50px) scale(1.1);
-  }
-  66% {
-    transform: translate(-20px, 20px) scale(0.9);
-  }
-}
-
 /* --- 4. GLASSMORPHIC UTILITIES --- */
 .glass-panel {
-  /* This creates the separation between the "soup" background and the "rigid" content */
   background: rgba(5, 5, 5, 0.2);
   backdrop-filter: blur(10px); /* Frosted glass effect */
   -webkit-backdrop-filter: blur(10px);
@@ -228,6 +182,7 @@ h1 {
   overflow: hidden;
   white-space: nowrap;
   padding: 1.2rem 0;
+  cursor: default;
 }
 
 .marquee-content {
@@ -236,9 +191,8 @@ h1 {
 }
 
 .marquee-content span {
-  font-family: var(--font-serif);
+  font-family: var(--font-mono);
   font-size: 1.5rem;
-  font-style: italic;
   margin: 0 2rem;
 }
 
@@ -261,7 +215,7 @@ h1 {
 .footer-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  height: 25vh; /* Fixed height for footer area */
+  height: 25vh;
 }
 
 .action-btn {
@@ -269,15 +223,31 @@ h1 {
   flex-direction: column;
   justify-content: space-between;
   padding: 1.5rem;
-  transition: background 0.4s ease;
+  transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  /* Slight background shift on hover */
+}
+
+.action-btn:hover {
+  background: rgba(230, 228, 220, 0.05); /* Very subtle light up */
 }
 
 .mono-label {
   font-family: var(--font-mono);
   font-size: 0.75rem;
   opacity: 0.6;
+  z-index: 2;
+}
+
+/* --- THE KINETIC TICKER ANIMATION --- */
+
+.link-text-wrapper {
+  /* Height must match the font-size/line-height to crop effectively */
+  height: 2rem;
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
 }
 
 .link-text {
@@ -285,44 +255,33 @@ h1 {
   font-family: var(--font-sans);
   font-weight: 700;
   text-transform: uppercase;
-  z-index: 2;
+  line-height: 1; /* Ensures text fits tight in the wrapper */
+  display: block;
+  /* The Physics: Cubic Bezier for that "snappy" Swiss feel */
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Hover Effect: The "Organic Swell" */
-.action-btn::before {
-  content: '';
+/* The Duplicate Text (Ghost) */
+.link-text::after {
+  content: attr(data-text); /* Grabs text from HTML */
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0%;
-  height: 0%;
-  background: var(--fg);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  transition:
-    width 0.6s ease,
-    height 0.6s ease;
-  z-index: 1;
-  filter: blur(20px);
+  top: 100%; /* Sits directly below visible text */
+  left: 0;
+  opacity: 0.5; /* Slightly faded for the incoming text */
 }
 
-.action-btn:hover::before {
-  width: 150%;
-  height: 150%;
+/* The Trigger */
+.action-btn:hover .link-text {
+  transform: translateY(-100%); /* Slide everything up */
 }
 
-.action-btn:hover .link-text,
 .action-btn:hover .mono-label {
-  color: var(--bg); /* Invert text color on hover */
-  z-index: 2;
+  color: var(--fg);
+  opacity: 1;
 }
 
 /* --- 7. RESPONSIVE --- */
 @media (min-width: 768px) {
-  .footer-grid {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-
   h1 {
     flex-direction: row; /* Side by side on desktop */
     gap: 1rem;

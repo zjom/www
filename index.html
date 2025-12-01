@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Portfolio of Zihan Jin, Full Stack Engineer."
+      content="Portfolio of Zihan Jin, Software Engineer and Architect."
     />
-    <title>ZIHAN JIN — FULL STACK</title>
+    <title>ZIHAN JIN — Software Engineer and Architect</title>
     <link rel="stylesheet" href="./styles.css" />
     <script src="./script.js" defer></script>
   </head>
@@ -20,9 +20,9 @@
       <header class="border-b glass-panel">
         <div class="mono-stack">
           <span class="dot-indicator"></span>
-          <span>AVAILABLE FOR WORK</span>
+          <span>Online Now</span>
         </div>
-        <span class="mono" id="time-container">MELB / GLOBAL</span>
+        <span class="mono" id="time-container"></span>
       </header>
 
       <section class="hero-section border-b glass-panel">
@@ -34,17 +34,16 @@
 
       <div class="marquee-container border-b glass-panel">
         <div class="marquee-content">
-          <span>React</span> <span class="divider">~</span>
-          <span>Node.js</span> <span class="divider">~</span>
-          <span>TypeScript</span> <span class="divider">~</span>
-          <span>AWS</span> <span class="divider">~</span> <span>Python</span>
-          <span class="divider">~</span> <span>PostgreSQL</span>
+          <span>Go</span>
           <span class="divider">~</span> <span>React</span>
           <span class="divider">~</span> <span>Node.js</span>
           <span class="divider">~</span> <span>TypeScript</span>
           <span class="divider">~</span> <span>AWS</span>
           <span class="divider">~</span> <span>Python</span>
           <span class="divider">~</span> <span>PostgreSQL</span>
+          <span class="divider">~</span> <span>JavaScript</span>
+          <span class="divider">~</span> <span>Redis</span>
+          <span class="divider">~</span> <span>Elixir</span>
           <span class="divider">~</span>
         </div>
       </div>
@@ -52,21 +51,42 @@
       <footer class="footer-grid">
         <a
           href="mailto:admin@zihanjin.com"
-          class="action-btn border-r glass-panel"
+          class="action-btn border-r border-b glass-panel"
         >
           <span class="mono-label">01. CONTACT</span>
-          <span class="link-text">Email Me</span>
+          <div class="link-text-wrapper">
+            <span class="link-text" data-text="admin@zihanjin.com"
+              >Email Me</span
+            >
+          </div>
         </a>
+
         <a
           href="https://github.com/zjom"
-          class="action-btn border-r glass-panel"
+          class="action-btn border-r border-b glass-panel"
         >
           <span class="mono-label">02. CODE</span>
-          <span class="link-text">GitHub</span>
+          <div class="link-text-wrapper">
+            <span class="link-text" data-text="github.com/zjom">GitHub</span>
+          </div>
         </a>
-        <a href="./resume.pdf" class="action-btn glass-panel" download>
+
+        <a
+          href="./resume.pdf"
+          class="action-btn glass-panel border-r border-b"
+          download
+        >
           <span class="mono-label">03. PROFILE</span>
-          <span class="link-text">Resume</span>
+          <div class="link-text-wrapper">
+            <span class="link-text" data-text="Download">Resume</span>
+          </div>
+        </a>
+
+        <a href="/content" class="action-btn glass-panel border-b">
+          <span class="mono-label">04. CONTENT</span>
+          <div class="link-text-wrapper">
+            <span class="link-text" data-text="bottom text">CREATIONS</span>
+          </div>
         </a>
       </footer>
     </main>
