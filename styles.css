@@ -261,9 +261,6 @@ h1 {
 }
 
 /* The Trigger */
-.action-btn:hover .link-text {
-  transform: translateY(-100%); /* Slide everything up */
-}
 
 .action-btn:hover .mono-label {
   color: var(--fg);
@@ -275,6 +272,10 @@ h1 {
   h1 {
     flex-direction: row; /* Side by side on desktop */
     gap: 1rem;
+  }
+
+  .action-btn:hover .link-text {
+    transform: translateY(-100%); /* Slide everything up */
   }
 }
 
