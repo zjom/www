@@ -277,3 +277,40 @@ h1 {
     gap: 1rem;
   }
 }
+
+/* --- HERO TITLE KINETIC ENTRANCE --- */
+
+/* 1. The Mask */
+.ticker-wrapper {
+  overflow: hidden; /* Hides the text when it's "below" the line */
+  display: block;
+  line-height: 0.9; /* Keeps tight spacing matching your H1 */
+  padding-bottom: 0.1em; /* Prevents descenders (g, j, y) from being cut off */
+}
+
+/* 2. The Text to Animate */
+.ticker-text {
+  display: block;
+  transform: translateY(110%); /* Start hidden below the mask */
+  opacity: 0;
+
+  /* The Physics: Same 'Swiss' curve as the buttons */
+  animation: reveal-up 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* 3. The Stagger (Delays the last name slightly) */
+.delay-1 {
+  animation-delay: 0.15s;
+}
+
+/* 4. The Animation Keyframes */
+@keyframes reveal-up {
+  0% {
+    transform: translateY(110%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
