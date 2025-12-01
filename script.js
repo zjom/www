@@ -3,6 +3,9 @@ const TIMEZONE_TO_DISPLAY = 'Australia/Sydney'
 
 function updateTime(timezone) {
   const timeContainer = document.getElementById(TIME_CONTAINER_ID)
+  if (!timeContainer) {
+    return
+  }
 
   const now = new Date()
 
